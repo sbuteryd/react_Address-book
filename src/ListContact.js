@@ -30,6 +30,7 @@ export default class ListContact extends Component{
         }else {
             showListContact = this.props.contacts
         }
+
         return (
             <div className='list-contacts'>
                 <div className='list-contacts-top'>
@@ -46,7 +47,6 @@ export default class ListContact extends Component{
 
                 <div className='list-contacts'>
                     {showListContact.map((contact)=>(
-
                         <li key={contact.id} className='contact-list-item'>
                             <div className='contact-avatar' style={{backgroundImage:`url(${contact.avatarURL})`}}/>
                             <div className='contact-details'>

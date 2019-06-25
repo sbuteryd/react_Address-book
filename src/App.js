@@ -24,6 +24,15 @@ class App extends Component{
             contacts:state.contacts.filter((c) => c.id !==contact.id)
         }))
     }
+    createContactApi = (values)=>{
+        ContactsAPI.create(values).then(values =>{
+            this.setState((state)=>({
+                contacts:state.contacts.concat([values])
+            }))
+        })
+
+        console.log(values)
+    };
     render() {
         return(
             <div>
@@ -34,13 +43,19 @@ class App extends Component{
                     />
                 )}/>
 
-                <Route path='/create' render={ ()=>
-                    (<CreateContact/>)
+                <Route path='/create' render={({history})=> (<CreateContact
+                        updateContact={values=>{
+                            this.createContactApi(values);
+                            history.push('/')
+                        }}
+
+                    />)
                 }/>
 
             </div>
         )
     }
 }
+
 
 export  default App
