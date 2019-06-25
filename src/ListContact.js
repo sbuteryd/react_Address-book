@@ -35,6 +35,7 @@ export default class ListContact extends Component{
             <div className='list-contacts'>
                 <div className='list-contacts-top'>
                     <input className='search-contacts' type="text" value={this.state.query} onChange={(event => this.updateContact(event.target.value))}/>
+                    <a className='add-contact'>contact</a>
                 </div>
 
                 {showListContact.length !== this.props.contacts.length &&(
