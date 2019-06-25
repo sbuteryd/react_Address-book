@@ -13,7 +13,14 @@ export default class ListContact extends Component{
         })
     };
 
+    clearContact = ()=>{
+        this.setState({
+            query:''
+        })
+    }
+
     render() {
+
         let showListContact;
         if(this.state.query){
             const match = new RegExp(escape(this.state.query),'i') ;
@@ -22,13 +29,24 @@ export default class ListContact extends Component{
         }else {
             showListContact = this.props.contacts
         }
+        {console.log(this.props.contacts.length)}
+        {console.log(showListContact.length)}
         return (
-            <div>
+            <div className='list-contacts'>
                 <div className='list-contacts-top'>
                     <input className='search-contacts' type="text" value={this.state.query} onChange={(event => this.updateContact(event.target.value))}/>
                 </div>
+
+                {showListContact.length !== this.props.contacts.length &&(
+                    <div className='showing-contacts'>
+                        <span>Showing {showListContact.length} of {this.props.contacts.length} total</span>
+                        <button onClick={this.clearContact}>show all</button>
+                    </div>
+                )}
+
                 <div className='list-contacts'>
                     {showListContact.map((contact)=>(
+
                         <li key={contact.id} className='contact-list-item'>
                             <div className='contact-avatar' style={{backgroundImage:`url(${contact.avatarURL})`}}/>
                             <div className='contact-details'>
@@ -37,6 +55,7 @@ export default class ListContact extends Component{
                             </div>
                             <button onClick={()=>this.props.onDeleteContact(contact)} className='contact-remove'>remove</button>
                         </li>
+
                     ))}
                 </div>
             </div>
