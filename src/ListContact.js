@@ -14,13 +14,21 @@ export default class ListContact extends Component{
     };
 
     render() {
+        let showListContact;
+        if(this.state.query){
+            const match = new RegExp(escape(this.state.query),'i') ;
+            showListContact = this.props.contacts.filter((c)=> match.test(c.name))
+
+        }else {
+            showListContact = this.props.contacts
+        }
         return (
             <div>
                 <div className='list-contacts-top'>
                     <input className='search-contacts' type="text" value={this.state.query} onChange={(event => this.updateContact(event.target.value))}/>
                 </div>
                 <div className='list-contacts'>
-                    {this.props.contacts.map((contact)=>(
+                    {showListContact.map((contact)=>(
                         <li key={contact.id} className='contact-list-item'>
                             <div className='contact-avatar' style={{backgroundImage:`url(${contact.avatarURL})`}}/>
                             <div className='contact-details'>
