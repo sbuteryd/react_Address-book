@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import  Regexp from  'escape-string-regexp'
+import {Link}  from 'react-router-dom'
 
 export default class ListContact extends Component{
 
@@ -29,13 +30,11 @@ export default class ListContact extends Component{
         }else {
             showListContact = this.props.contacts
         }
-        {console.log(this.props.contacts.length)}
-        {console.log(showListContact.length)}
         return (
             <div className='list-contacts'>
                 <div className='list-contacts-top'>
                     <input className='search-contacts' type="text" value={this.state.query} onChange={(event => this.updateContact(event.target.value))}/>
-                    <a className='add-contact'>contact</a>
+                    <Link  to='/create' className='add-contact'>contact</Link>
                 </div>
 
                 {showListContact.length !== this.props.contacts.length &&(
