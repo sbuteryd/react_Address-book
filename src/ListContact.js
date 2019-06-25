@@ -14,7 +14,7 @@ export default class ListContact extends Component{
                                 <p>{contact.name}</p>
                                 <p>{contact.email}</p>
                             </div>
-                            <button className='contact-remove'>remove</button>
+                            <button onClick={()=>this.props.onDeleteContact(contact)} className='contact-remove'>remove</button>
                         </li>
                     ))}
                 </div>
