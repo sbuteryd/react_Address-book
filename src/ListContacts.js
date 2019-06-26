@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 // escape-string-RegularExpression
 import escapeRegexp from 'escape-string-regexp'
+import {Link} from 'react-router-dom'
 import sortBy from 'sort-by'
 export default class ListContacts extends  Component{
     state ={
@@ -28,8 +29,9 @@ export default class ListContacts extends  Component{
         }
         return (
             <div>
-                <div>
+                <div className='list-contacts-top'>
                     <input value={this.state.query} onChange={(e)=>this.updateSearch(e.target.value)} className='search-contacts' type="text"/>
+                    <Link to='/create' className='add-contact'>Link</Link>
                 </div>
                 {this.props.contacts.length !== showContacts.length &&(
                     <div className='showing-contacts'>
@@ -38,7 +40,7 @@ export default class ListContacts extends  Component{
                     </div>
 
                 )}
-                <div className='contact-list'>
+                <div className='list-contacts'>
                     {showContacts.map((contact)=>(
                         <li key={contact.id} className='contact-list-item'>
                             <div className='contact-avatar' style={{backgroundImage:`url(${contact.avatarURL})`}}/>

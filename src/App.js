@@ -1,13 +1,16 @@
 import React,{Component} from 'react'
-import ContactsAPI, {getAll} from './utils/ContactsAPI'
 import ListContacts from './ListContacts'
+import {Route} from 'react-router-dom'
+import * as  ContactsAPI from './utils/ContactsAPI'
+import CreateContacts from './CreateContacts'
+
 
 class App extends Component{
     state = {
         contacts:[]
     };
     componentDidMount() {
-        getAll().then(contacts=>{
+        ContactsAPI.getAll().then(contacts=>{
             this.setState({
                 contacts
             })
@@ -18,17 +21,39 @@ class App extends Component{
         this.setState((state)=>({
             contacts:state.contacts.filter((c)=> c.id !==contact.id)
         }))
+        ContactsAPI.remove(contact)
+    }
+    updateContact  = (contactNew)=> {
+        console.log(contactNew)
+        ContactsAPI.create(contactNew).then(contactNew => {
+            this.setState(state=>({
+                contacts:state.contacts.concat([contactNew])
+            }))
+        })
     }
 
     render() {
 
         return(
             <div>
-                <ListContacts
-                    contacts ={this.state.contacts}
-                    ondeleteContact = {this.removeContact}
+                <Route exact path='/' render={()=>
+                    <ListContacts
+                        contacts ={this.state.contacts}
+                        ondeleteContact = {this.removeContact}
+                    />
+                }/>
 
-                />
+                <Route path='/create' render={({history})=>(
+                        <CreateContacts
+                            getForm ={ (contactNew)=>{
+                                this.updateContact(contactNew)
+                                history.push('/')
+                            }}
+
+                        />
+                    )
+
+                }/>
             </div>
         )
     }
