@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 
 
 export default class ListContact extends Component{
+    updateContacts =(contact)=>{
+        console.log('click',contact)
+        this.props.onDeleteContact(contact)
+    };
     render() {
         return (
             <div>
@@ -12,7 +16,7 @@ export default class ListContact extends Component{
                             <p>{contact.name}</p>
                             <p>{contact.email}</p>
                         </div>
-                        <button className='contact-remove'>remove</button>
+                        <button onClick={()=>this.updateContacts(contact)} className='contact-remove'>remove</button>
 
                     </li>
                 ))}

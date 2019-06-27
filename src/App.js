@@ -12,11 +12,15 @@ class App extends Component{
             this.setState(({contactsList: contacts}))
         })
     }
-
+    clearContact =(contact)=>{
+        console.log(contact)
+    };
     render() {
         return(
             <div>
-                <ListContact contacts={this.state.contactsList} />
+                <ListContact
+                    onDeleteContact={this.clearContact}
+                    contacts={this.state.contactsList} />
             </div>
         )
     }
