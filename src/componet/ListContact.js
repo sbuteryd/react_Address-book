@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import escapeStringRegexp from 'escape-string-regexp'
+import {Link} from 'react-router-dom'
 
 // regularExpression
 export default class ListContact extends Component{
@@ -27,7 +28,7 @@ export default class ListContact extends Component{
             <div>
                 <div className='list-contacts-top'>
                     <input className='search-contacts' value={this.state.query} onChange={(event)=>this.updateInput(event.target.value)} type="text"/>
-                    <a className='add-contact' href="">list</a>
+                    <Link to='/create' className='add-contact' href=""/>
 
                 </div>
                 {showContactList.length !== this.props.contacts.length &&(
