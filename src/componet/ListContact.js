@@ -14,16 +14,26 @@ export default class ListContact extends Component{
             query:query
         }))
     };
+    showALl =()=>{
+        this.setState(({
+            query:''
+        }))
+    }
     render() {
         let showContactList
         const match = new RegExp(this.state.query,'i');
         showContactList = this.props.contacts.filter((c)=> match.test(c.name));
-        console.log('showContactList',showContactList);
         return (
             <div>
                 <div className='contact-list'>
                     <input className='search-contacts' value={this.state.query} onChange={(event)=>this.updateInput(event.target.value)} type="text"/>
                 </div>
+                {showContactList.length !== this.props.contacts.length &&(
+                    <div className='showing-contacts'>
+                        <div>serarch:{showContactList.length } total: {this.props.contacts.length}</div>
+                        <button onClick={this.showALl}  >Show all</button>
+                    </div>
+                )}
                 {showContactList.map((contact)=>(
                     <li className='contact-list-item' key={contact.id}>
                         <div className='contact-avatar' style={{backgroundImage:`url(${contact.avatarURL})`}} />
