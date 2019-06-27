@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import ImageInput from '../ImageInput'
-
+import serialize  from 'form-serialize'
+//form-serialize
 export default class CreateContact extends Component{
     BlockDefault = (e)=>{
-        e.preventDefault()
-        console.log(e.target)
+        e.preventDefault();
+       const values =  serialize(e.target,{hash:true});
+
     }
     render() {
         return (
