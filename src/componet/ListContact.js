@@ -22,7 +22,7 @@ export default class ListContact extends Component{
     }
     render() {
         let showContactList
-        const match = new RegExp(this.state.query,'i');
+        const match = new RegExp(escapeStringRegexp(this.state.query),'i');
         showContactList = this.props.contacts.filter((c)=> match.test(c.name));
         return (
             <div>

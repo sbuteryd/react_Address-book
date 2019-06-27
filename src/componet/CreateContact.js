@@ -7,14 +7,16 @@ export default class CreateContact extends Component{
     BlockDefault = (e)=>{
         e.preventDefault();
        const values =  serialize(e.target,{hash:true});
+       if(this.props.addContact)
+           this.props.addContact(values)
 
-    }
+    };
     render() {
         return (
             <div>
                 <Link className='close-create-contact' to='/'/>
                 <form className='create-contact-form' action="" onSubmit={(e)=>this.BlockDefault(e)}>
-                    <ImageInput className='create-contact-avatar-input' name='avatarURL'>avatar</ImageInput>
+                    <ImageInput className='create-contact-avatar-input' name='avatarURL' maxHeight={64}>avatar</ImageInput>
                     <div className='create-contact-details'>
                         <input type="text" name='name' placeholder='Name'/>
                         <input type="text" name='email' placeholder='Email'/>

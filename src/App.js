@@ -19,6 +19,16 @@ class App extends Component{
             contactsList:state.contactsList.filter((c)=> c.id !== contact.id)
         }))
     };
+    addContact =(values)=> {
+        ContactsAPI.create(values).then(()=>{
+            this.setState((state)=>({
+                contactsList:state.contactsList.concat(values)
+            }))
+        })
+
+    }
+
+
     render() {
         return(
             <div>
@@ -27,8 +37,11 @@ class App extends Component{
                     onDeleteContact={this.clearContact}
                     contacts={this.state.contactsList} />
                 )} />
-                <Route path='/create' render={()=>(
+                <Route path='/create' render={({history})=>(
                     <CreateContact
+                        addContact={(contacts)=> {this.addContact(contacts)
+                            history.push('/')}
+                        }
                     />
                 )}
                 />
