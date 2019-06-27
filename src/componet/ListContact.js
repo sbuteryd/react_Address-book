@@ -25,8 +25,10 @@ export default class ListContact extends Component{
         showContactList = this.props.contacts.filter((c)=> match.test(c.name));
         return (
             <div>
-                <div className='contact-list'>
+                <div className='list-contacts-top'>
                     <input className='search-contacts' value={this.state.query} onChange={(event)=>this.updateInput(event.target.value)} type="text"/>
+                    <a className='add-contact' href="">list</a>
+
                 </div>
                 {showContactList.length !== this.props.contacts.length &&(
                     <div className='showing-contacts'>
@@ -34,17 +36,20 @@ export default class ListContact extends Component{
                         <button onClick={this.showALl}  >Show all</button>
                     </div>
                 )}
-                {showContactList.map((contact)=>(
-                    <li className='contact-list-item' key={contact.id}>
-                        <div className='contact-avatar' style={{backgroundImage:`url(${contact.avatarURL})`}} />
-                        <div className='contact-details'>
-                            <p>{contact.name}</p>
-                            <p>{contact.email}</p>
-                        </div>
-                        <button onClick={()=>this.updateContacts(contact)} className='contact-remove'>remove</button>
+                <div className='list-contacts'>
+                    {showContactList.map((contact)=>(
+                        <li className='contact-list-item' key={contact.id}>
+                            <div className='contact-avatar' style={{backgroundImage:`url(${contact.avatarURL})`}} />
+                            <div className='contact-details'>
+                                <p>{contact.name}</p>
+                                <p>{contact.email}</p>
+                            </div>
+                            <button onClick={()=>this.updateContacts(contact)} className='contact-remove'>remove</button>
 
-                    </li>
-                ))}
+                        </li>
+                    ))}
+                </div>
+
             </div>
         );
     }
