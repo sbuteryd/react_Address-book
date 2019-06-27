@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
+import escapeStringRegexp from 'escape-string-regexp'
 
-
+// regularExpression
 export default class ListContact extends Component{
     state = {
         query:''
@@ -14,13 +15,16 @@ export default class ListContact extends Component{
         }))
     };
     render() {
+        let showContactList
+        const match = new RegExp(this.state.query,'i');
+        showContactList = this.props.contacts.filter((c)=> match.test(c.name));
+        console.log('showContactList',showContactList);
         return (
             <div>
-                {JSON.stringify(this.state.query)}
                 <div className='contact-list'>
                     <input className='search-contacts' value={this.state.query} onChange={(event)=>this.updateInput(event.target.value)} type="text"/>
                 </div>
-                {this.props.contacts.map((contact)=>(
+                {showContactList.map((contact)=>(
                     <li className='contact-list-item' key={contact.id}>
                         <div className='contact-avatar' style={{backgroundImage:`url(${contact.avatarURL})`}} />
                         <div className='contact-details'>
