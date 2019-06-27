@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import * as ContactsAPI from './utils/ContactsAPI'
+import ListContact from './componet/ListContact'
 
 
 class App extends Component{
@@ -13,10 +14,9 @@ class App extends Component{
     }
 
     render() {
-        {console.log('state',this.state.contactsList)}
         return(
             <div>
-                Hello
+                <ListContact contacts={this.state.contactsList} />
             </div>
         )
     }
