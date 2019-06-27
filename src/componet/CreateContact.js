@@ -1,12 +1,24 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import ImageInput from '../ImageInput'
 
 export default class CreateContact extends Component{
+    BlockDefault = (e)=>{
+        e.preventDefault()
+        console.log(e.target)
+    }
     render() {
         return (
             <div>
                 <Link className='close-create-contact' to='/'/>
-                hello world
+                <form className='create-contact-form' action="" onSubmit={(e)=>this.BlockDefault(e)}>
+                    <ImageInput className='create-contact-avatar-input' name='avatarURL'>avatar</ImageInput>
+                    <div className='create-contact-details'>
+                        <input type="text" name='name' placeholder='Name'/>
+                        <input type="text" name='email' placeholder='Email'/>
+                        <button>Add contact</button>
+                    </div>
+                </form>
             </div>
         );
     }
