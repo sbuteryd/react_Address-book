@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 
 export default class ListContact extends Component{
     updateContacts =(contact)=>{
-        console.log('click',contact)
         this.props.onDeleteContact(contact)
     };
     render() {

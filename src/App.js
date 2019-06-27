@@ -13,7 +13,9 @@ class App extends Component{
         })
     }
     clearContact =(contact)=>{
-        console.log(contact)
+        this.setState((state)=>({
+            contactsList:state.contactsList.filter((c)=> c.id !== contact.id)
+        }))
     };
     render() {
         return(
