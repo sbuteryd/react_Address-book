@@ -1,5 +1,4 @@
 import React from 'react'
-
 class ProductCategoryRow extends React.Component {
     render() {
         const category = this.props.category;
@@ -16,11 +15,7 @@ class ProductCategoryRow extends React.Component {
 class ProductRow extends React.Component {
     render() {
         const product = this.props.product;
-        const name = product.stocked ?
-            product.name :
-            <span style={{color: 'red'}}>
-        {product.name}
-      </span>;
+        const name = product.stocked ? product.name : <span style={{color: 'red'}}>{product.name}</span>;
 
         return (
             <tr>
@@ -81,7 +76,7 @@ class SearchBar extends React.Component {
     }
 }
 
-export default class App extends React.Component {
+export default class FilterableProductTable extends React.Component {
     render() {
         return (
             <div>
@@ -91,3 +86,4 @@ export default class App extends React.Component {
         );
     }
 }
+
