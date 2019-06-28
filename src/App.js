@@ -4,8 +4,6 @@ import  ListContact  from './ListContact'
 import {Route}  from 'react-router-dom'
 import CreateContact  from './createContact'
 
-
-
 class App extends Component{
 
     state = {
