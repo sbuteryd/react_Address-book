@@ -1,28 +1,23 @@
-import React, {Component} from 'react'
+import React,{Component} from 'react'
 
 
-
-
-
-
-class TableDetails extends Component{
+class  TableDetails extends React.Component{
     render() {
-        const products = this.props.products;
-        let name = products.stocked ? products.name:<span style={{color:'red'}}>{products.name}</span>
+        const product = this.props.product;
+        const name =  product.stocked ? product.name:<span style={{color:'red'}}>{product.name}</span>
         return (
             <tr>
                 <td>{name}</td>
-                <td>{products.price}</td>
+                <td>{product.price}</td>
             </tr>
         );
     }
 }
 
 
-class FormCategory extends Component{
+class FormCategory extends React.Component{
     render() {
-        const category = this.props.category;
-
+       const category =this.props.category
         return (
             <tr>
                 <th>{category}</th>
@@ -32,38 +27,31 @@ class FormCategory extends Component{
 }
 
 
-class Table extends Component{
+class Table extends React.Component{
     render() {
-        const rows =[];
-        let onlyhead =null;
-        const products = this.props.products;
-        products.forEach((products)=>{
-            if(products.category !==onlyhead){
-               rows.push(
-                   <FormCategory
-                       category={products.category}
-                       key={products.category}
-                   />
-                   )
+        const rows =[]
+        let onlyName = null;
+        this.props.products.forEach((product)=>{
+            if(product.category !== onlyName){
+                rows.push(
+                    <FormCategory
+                        category={product.category}
+                        key={product.category}/>
+                );
             }
             rows.push(
-                <TableDetails
-                    key ={products.name}
-                    products={products}/>
+                <TableDetails product={product} key={product.name} />
             )
-            onlyhead = products.category
+            onlyName = product.category
         })
-
         return (
             <table>
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                    </tr>
+                    <tr><th>Name</th></tr>
+                    <tr><th>Price</th></tr>
                 </thead>
                 <tbody>
-                    {rows}
+                {rows}
                 </tbody>
             </table>
         );
@@ -71,16 +59,32 @@ class Table extends Component{
 }
 
 
-export default class outerBorder  extends Component{
+class Search extends React.Component{
+    render() {
+        return (
+            <form>
+                <input type="text" placeholder='Search'/>
+                <p>
+                    <input type="checkbox"/>
+                    only show products in stock
+                </p>
+            </form>
+        );
+    }
+}
+
+
+
+export default class Box extends React.Component{
     render() {
         return (
             <div>
+                <Search/>
                 <Table products={PRODUCTS}/>
             </div>
         );
     }
 }
-
 
 const PRODUCTS = [
     {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
