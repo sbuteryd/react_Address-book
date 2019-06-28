@@ -12,7 +12,7 @@ export default class ListContact extends React.Component{
     }
     updateInput = (values)=>{
         this.setState(({
-            query:values
+            query:values.trim()
         }))
     }
     render() {
