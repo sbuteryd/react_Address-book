@@ -1,7 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import escapeStringRegexp from 'escape-string-regexp'
+import PropType from 'prop-types'
 export default class ListContact extends React.Component{
+    static  PropType ={
+        contacts:PropType.array.isRequired,
+        clearContact:PropType.func.isRequired
+    }
     state ={
         query:''
     }
